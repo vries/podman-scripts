@@ -1,0 +1,34 @@
+# The container files borrow heavily from the sourceware buildbot
+# configuration files.  See:
+# - https://builder.sourceware.org/
+# - https://sourceware.org/git/builder.git
+#
+
+# Common podman commands.
+
+# CONTAINERS.
+
+# List all containers.
+$ podman ps -a
+
+# List all running containers.
+$ podman ps
+
+# Stop running container.
+$ podman stop <id>
+
+# Remove container.
+$ podman rm <id>
+
+
+# IMAGES.
+
+# List all images.
+$ podman images
+
+# Remove image.
+$ podman image rm <id>
+
+# Force remove image.  Useful if an image build failed, after which podman
+# claims that the image is used by a container that was never created.
+$ podman image rm -f <id>
