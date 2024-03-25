@@ -1,15 +1,69 @@
-gcc gcc-c++ libubsan libasan libtool valgrind 
-glibc-gconv-extra 
-isl-devel libmpc-devel mpfr-devel gmp-devel autogen 
-patch util-linux diffutils bsdtar cpio procps 
-coreutils make git autoconf dejagnu automake gettext-devel bison flex 
-bzip2 bzip2-devel xz xz-devel gzip zlib-devel zstd libzstd-devel 
-expat-devel 
-findutils file tar curl libarchive-devel libcurl-devel 
-elfutils elfutils-devel ncurses-devel 
-texinfo elfutils-debuginfod elfutils-debuginfod-client-devel 
-gcc-plugin-devel binutils-devel 
-gc-devel readline-devel texinfo-tex 
-libxml2-devel dos2unix dpkg python3-devel 
-mailcap gdb help2man wget xxhash-devel 
+# For building gdb, required.
+gcc
+gcc-c++
+libtool
+make
+mpfr-devel
+gmp-devel
+bison
+flex
+texinfo
+
+# For building gdb, optional.
+expat-devel
+glibc-gconv-extra
+readline-devel
+elfutils-devel
+ncurses-devel
+elfutils-debuginfod-client-devel
+python3-devel
+guile30-devel
+xxhash-devel
+zlib-devel libzstd-devel
+xz-devel
+gettext-devel
+
+# Ignoring.
+#gcc-plugin-devel
+
+# For testing gdb, required.
+dejagnu
+
+# For testing gdb, optional.
+valgrind
+elfutils-debuginfod
+gcc-gfortran
+gcc-gnat
+gcc-objc
+gcc-objc++
+gcc-gm2
+gcc-go
+gcc-gdc ldc
+fpc
+rustc
+bzip2
+elfutils
+glibc-static
+python3-pygments
+dwz
+clang
+
+# Other.
+libubsan libasan
+git patch
+util-linux diffutils cpio
+procps # pidof
+coreutils findutils file
+autoconf automake autogen
+xz gzip zstd
+tar bsdtar
+gdb
+wget curl
 black
+
+# Other, distro specific.
+dpkg
+
+# Other, user specific.
+emacs
+mold
