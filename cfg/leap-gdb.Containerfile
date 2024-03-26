@@ -28,7 +28,7 @@ RUN zypper -n install \
     gcc-c++-32bit \
     gcc-fortran \
     fpc \
-    rust1.71 \
+    rust \
     gcc-objc \
     gcc-go \
     gettext-devel \

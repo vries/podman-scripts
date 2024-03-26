@@ -32,7 +32,7 @@ systemtap-sdt-devel
 glibc-devel-32bit glibc-devel-static glibc-devel-static-32bit
 gcc-32bit gcc-c++-32bit
 valgrind
-gcc-ada gcc-fortran fpc rust1.71 gcc-objc gcc-go
+gcc-ada gcc-fortran fpc rust gcc-objc gcc-go
 elfutils-debuginfod
 sharutils
 python3-pygments
