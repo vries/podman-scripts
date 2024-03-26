@@ -1,5 +1,11 @@
 #!/bin/sh
 
+last ()
+{
+    last=$#
+    echo ${!last}
+}
+
 get_packages ()
 {
     file="$1"
@@ -111,10 +117,42 @@ opensuse ()
     done
 }
 
+debian ()
+{
+    versions="stable"
+    packages=$(get_packages debian.packages)
+
+    last_package=$(last $packages)
+
+    for version in $versions; do
+	file=debian-$version-gdb.Containerfile
+
+	{
+	    echo "FROM debian:$version"
+	    echo
+	    echo "RUN apt-get update"
+	    echo
+	    echo "RUN apt-get upgrade -y"
+	    echo
+	    echo "RUN apt-get install -y \\"
+	    for package in $packages; do
+		if [ "$package" = "$last_package" ]; then
+		    echo "    $package"
+		else
+		    echo "    $package \\"
+		fi
+	    done
+	    echo
+	    echo "RUN apt-get clean"
+	} > "$file"
+    done
+}
+
 main ()
 {
     fedora
     opensuse
+    debian
 }
 
 main "$@"
