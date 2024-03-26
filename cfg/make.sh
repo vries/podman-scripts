@@ -21,20 +21,20 @@ get_packages ()
 
 fedora()
 {
-    fedora_versions="38 39 40 rawhide"
-    fedora_packages=$(get_packages fedora.packages)
+    versions="38 39 40 rawhide"
+    packages=$(get_packages fedora.packages)
 
-    for fedora_version in $fedora_versions; do
-	file=fedora-$fedora_version-gdb.Containerfile
+    for version in $versions; do
+	file=fedora-$version-gdb.Containerfile
 
 	{
-	    echo "FROM registry.fedoraproject.org/fedora:$fedora_version"
+	    echo "FROM registry.fedoraproject.org/fedora:$version"
 	    echo
 	    echo "RUN dnf upgrade -y"
 	    echo
 	    echo "RUN dnf install -y \\"
-	    for fedora_package in $fedora_packages; do
-		echo "    $fedora_package \\"
+	    for package in $packages; do
+		echo "    $package \\"
 	    done
 	    echo "# End of list."
 	    echo
@@ -91,24 +91,24 @@ opensuse_packages_for ()
 
 opensuse ()
 {
-    opensuse_versions="leap leap:15.1 tumbleweed"
-    opensuse_packages=$(get_packages opensuse.packages)
+    versions="leap leap:15.1 tumbleweed"
+    packages=$(get_packages opensuse.packages)
 
-    for opensuse_version in $opensuse_versions; do
-	id=$(echo $opensuse_version | sed 's/:/-/g')
+    for version in $versions; do
+	id=$(echo $version | sed 's/:/-/g')
 	file=$id-gdb.Containerfile
 
 	{
-	    echo "FROM registry.opensuse.org/opensuse/$opensuse_version"
+	    echo "FROM registry.opensuse.org/opensuse/$version"
 	    echo
-	    case " $opensuse_version " in
+	    case " $version " in
 		" leap "|" tumbleweed ")
 		    echo "RUN zypper -n dup"
 		    echo
 	    esac
 	    echo "RUN zypper -n install \\"
-	    for opensuse_package in $opensuse_packages; do
-		echo "    $opensuse_package \\"
+	    for package in $packages; do
+		echo "    $package \\"
 	    done
 	    echo "# End of list."
 	    echo
