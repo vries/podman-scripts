@@ -1,4 +1,75 @@
 FROM registry.opensuse.org/opensuse/tumbleweed
+
 RUN zypper -n dup
-RUN zypper -n install  gcc gcc-c++ libtool mpfr-devel gmp-devel util-linux cpio procps coreutils make gettext-devel bison flex bzip2 libbz2-devel xz xz-devel gzip zlib-devel zstd libzstd-devel findutils file bsdtar tar libelf-devel libdw-devel libdebuginfod-devel libcurl-devel elfutils dos2unix python3-devel texinfo libexpat-devel glibc-devel glibc-locale xxhash-devel ncurses-devel libsource-highlight-devel libboost_regex-devel   dejagnu systemtap-sdt-devel glibc-devel-32bit glibc-devel-static glibc-devel-static-32bit gcc-32bit gcc-c++-32bit valgrind gcc-ada gcc-fortran fpc rust1.71 gcc-objc gcc-go elfutils-debuginfod sharutils python3-pygments binutils-gold   patch diffutils git autoconf automake   dpkg zypper   emacs mold
+
+RUN zypper -n install \
+    autoconf \
+    automake \
+    binutils-gold \
+    bison \
+    bsdtar \
+    bzip2 \
+    coreutils \
+    cpio \
+    dejagnu \
+    diffutils \
+    dos2unix \
+    dpkg \
+    elfutils \
+    elfutils-debuginfod \
+    emacs \
+    file \
+    findutils \
+    flex \
+    gcc \
+    gcc-32bit \
+    gcc-ada \
+    gcc-c++ \
+    gcc-c++-32bit \
+    gcc-fortran \
+    fpc \
+    rust1.71 \
+    gcc-objc \
+    gcc-go \
+    gettext-devel \
+    git \
+    glibc-devel \
+    glibc-devel-32bit \
+    glibc-devel-static \
+    glibc-devel-static-32bit \
+    glibc-locale \
+    gmp-devel \
+    libboost_regex-devel \
+    libbz2-devel \
+    xz \
+    xz-devel \
+    gzip \
+    zlib-devel \
+    zstd \
+    libzstd-devel \
+    libcurl-devel \
+    libdebuginfod-devel \
+    libdw-devel \
+    libelf-devel \
+    libexpat-devel \
+    libsource-highlight-devel \
+    libtool \
+    make \
+    mold \
+    mpfr-devel \
+    ncurses-devel \
+    patch \
+    procps \
+    python3-devel \
+    python3-pygments \
+    sharutils \
+    systemtap-sdt-devel \
+    tar \
+    texinfo \
+    util-linux \
+    valgrind \
+    xxhash-devel \
+    zypper \
+# End of list.
+
 RUN zypper clean
