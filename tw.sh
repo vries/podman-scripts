@@ -1,3 +1,3 @@
 #!/bin/sh
 
-./scripts/run.sh cfg/tw-gdb.Containerfile
+./scripts/run.sh cfg/tumbleweed-gdb.Containerfile
