@@ -69,7 +69,6 @@ RUN dnf install -y \
     xxhash-devel \
     xz \
     xz-devel \
-    zlib-devel \
-# End of list.
+    zlib-devel
 
 RUN dnf clean all

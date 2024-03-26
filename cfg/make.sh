@@ -6,6 +6,19 @@ last ()
     echo ${!last}
 }
 
+print_packages ()
+{
+    last_package=$(last $@)
+
+    for package in $@; do
+	if [ "$package" = "$last_package" ]; then
+	    echo "    $package"
+	else
+	    echo "    $package \\"
+	fi
+    done
+}
+
 get_packages ()
 {
     file="$1"
@@ -33,10 +46,7 @@ fedora()
 	    echo "RUN dnf upgrade -y"
 	    echo
 	    echo "RUN dnf install -y \\"
-	    for package in $packages; do
-		echo "    $package \\"
-	    done
-	    echo "# End of list."
+	    print_packages $packages
 	    echo
 	    echo "RUN dnf clean all"
 	} > "$file"
@@ -107,10 +117,7 @@ opensuse ()
 		    echo
 	    esac
 	    echo "RUN zypper -n install \\"
-	    for package in $packages; do
-		echo "    $package \\"
-	    done
-	    echo "# End of list."
+	    print_packages $packages
 	    echo
 	    echo "RUN zypper clean"
 	} > "$file"
@@ -121,8 +128,6 @@ debian ()
 {
     versions="stable"
     packages=$(get_packages debian.packages)
-
-    last_package=$(last $packages)
 
     for version in $versions; do
 	file=debian-$version-gdb.Containerfile
@@ -135,13 +140,7 @@ debian ()
 	    echo "RUN apt-get upgrade -y"
 	    echo
 	    echo "RUN apt-get install -y \\"
-	    for package in $packages; do
-		if [ "$package" = "$last_package" ]; then
-		    echo "    $package"
-		else
-		    echo "    $package \\"
-		fi
-	    done
+	    print_packages $packages
 	    echo
 	    echo "RUN apt-get clean"
 	} > "$file"

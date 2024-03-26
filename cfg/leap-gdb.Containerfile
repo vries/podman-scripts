@@ -69,7 +69,6 @@ RUN zypper -n install \
     util-linux \
     valgrind \
     xxhash-devel \
-    zypper \
-# End of list.
+    zypper
 
 RUN zypper clean
