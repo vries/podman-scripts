@@ -34,17 +34,67 @@ for fedora_version in $fedora_versions; do
     } > "$file"
 done
 
-opensuse_versions="leap tumbleweed"
+opensuse_versions="leap leap:15.1 tumbleweed"
 opensuse_packages=$(get_packages opensuse.packages)
 
+opensuse_packages_for ()
+{
+    local version="$1"
+
+    packages=""
+
+    for package in $opensuse_packages; do
+	case $package in
+	    mold)
+		case $version in
+		    tumbleweed)
+			true
+			;;
+		    *)
+			continue
+			;;
+		esac
+	esac
+
+	case $version in
+	    leap:43*|leap:15.0|leap:15.1|leap:15.2|leap:15.3)
+		case $package in
+		    libdebuginfod-devel|elfutils-debuginfod)
+			continue
+			;;
+		    libboost_regex-devel)
+			continue
+			;;
+		esac
+	esac
+
+	case $version in
+	    *)
+		case $package in
+		    gcc-32bit|gcc-c++-32bit|glibc-devel-32bit|glibc-devel-static-32bit)
+			continue
+			;;
+		esac
+	esac
+
+	packages="$packages $package"
+    done
+
+    echo $packages
+}
+
 for opensuse_version in $opensuse_versions; do
-    file=$opensuse_version-gdb.Containerfile
+    id=$(echo $opensuse_version | sed 's/:/-/g')
+    file=$id-gdb.Containerfile
 
     {
 	echo "FROM registry.opensuse.org/opensuse/$opensuse_version"
 	echo
-	echo "RUN zypper -n dup"
-	echo
+	case " $opensuse_version " in
+	    " leap "|" tumbleweed ")
+		echo "RUN zypper -n dup"
+		echo
+	esac
 	echo "RUN zypper -n install \\"
 	for opensuse_package in $opensuse_packages; do
 	    echo "    $opensuse_package \\"

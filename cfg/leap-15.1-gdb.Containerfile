@@ -1,53 +1,73 @@
-# Setup the (minimal) image, upgrade.
 FROM registry.opensuse.org/opensuse/leap:15.1
-#RUN zypper -n dup
 
-# Packages to build gdb.
 RUN zypper -n install \
-    gcc gcc-c++ \
-    libtool \
-    isl-devel mpc-devel mpfr-devel gmp-devel \
-    util-linux \
-    cpio \
-    procps \
+    autoconf \
+    automake \
+    binutils-gold \
+    bison \
+    bsdtar \
+    bzip2 \
     coreutils \
-    make \
-    gettext-devel \
-    bison flex \
-    bzip2 libbz2-devel xz xz-devel gzip zlib-devel zstd libzstd-devel \
-    findutils file \
-    bsdtar tar \
-    libelf-devel \
-    libdw-devel \
-    libcurl-devel \
-    elfutils \
-    dos2unix \
-    python3-devel \
-    texinfo \
-    libexpat-devel \
-    glibc-devel glibc-locale \
-    xxhash-devel \
-    ncurses-devel \
-    libsource-highlight-devel \
-    libboost_regex-devel
-
-# libdebuginfod-devel 
-
-# Packages to test gdb.
-RUN zypper -n install \
+    cpio \
     dejagnu \
-    systemtap-sdt-devel \
-    glibc-devel-static  \
-    valgrind \
-    gcc-ada gcc-fortran fpc gcc-objc gcc-go \
-    sharutils \
-    binutils-gold
-
-# Other packages
-RUN zypper -n install \
+    diffutils \
+    dos2unix \
+    dpkg \
+    elfutils \
+    elfutils-debuginfod \
     emacs \
-    patch diffutils \
-    git autoconf automake \
-    dpkg zypper
+    file \
+    findutils \
+    flex \
+    gcc \
+    gcc-32bit \
+    gcc-ada \
+    gcc-c++ \
+    gcc-c++-32bit \
+    gcc-fortran \
+    fpc \
+    rust \
+    gcc-objc \
+    gcc-go \
+    gettext-devel \
+    git \
+    glibc-devel \
+    glibc-devel-32bit \
+    glibc-devel-static \
+    glibc-devel-static-32bit \
+    glibc-locale \
+    gmp-devel \
+    libboost_regex-devel \
+    libbz2-devel \
+    xz \
+    xz-devel \
+    gzip \
+    zlib-devel \
+    zstd \
+    libzstd-devel \
+    libcurl-devel \
+    libdebuginfod-devel \
+    libdw-devel \
+    libelf-devel \
+    libexpat-devel \
+    libsource-highlight-devel \
+    libtool \
+    make \
+    mold \
+    mpfr-devel \
+    ncurses-devel \
+    patch \
+    procps \
+    python3-devel \
+    python3-pygments \
+    sharutils \
+    systemtap-sdt-devel \
+    tar \
+    texinfo \
+    util-linux \
+    valgrind \
+    xxhash-devel \
+    zypper \
+# End of list.
 
 RUN zypper clean
