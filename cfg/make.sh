@@ -13,29 +13,29 @@ get_packages ()
 	| sed 's/  */ /g;s/^ *//;s/ *$//'
 }
 
-fedora_versions="38 39 40 rawhide"
-fedora_packages=$(get_packages fedora.packages)
+fedora()
+{
+    fedora_versions="38 39 40 rawhide"
+    fedora_packages=$(get_packages fedora.packages)
 
-for fedora_version in $fedora_versions; do
-    file=fedora-$fedora_version-gdb.Containerfile
+    for fedora_version in $fedora_versions; do
+	file=fedora-$fedora_version-gdb.Containerfile
 
-    {
-	echo "FROM registry.fedoraproject.org/fedora:$fedora_version"
-	echo
-	echo "RUN dnf upgrade -y"
-	echo
-	echo "RUN dnf install -y \\"
-	for fedora_package in $fedora_packages; do
-	    echo "    $fedora_package \\"
-	done
-	echo "# End of list."
-	echo
-	echo "RUN dnf clean all"
-    } > "$file"
-done
-
-opensuse_versions="leap leap:15.1 tumbleweed"
-opensuse_packages=$(get_packages opensuse.packages)
+	{
+	    echo "FROM registry.fedoraproject.org/fedora:$fedora_version"
+	    echo
+	    echo "RUN dnf upgrade -y"
+	    echo
+	    echo "RUN dnf install -y \\"
+	    for fedora_package in $fedora_packages; do
+		echo "    $fedora_package \\"
+	    done
+	    echo "# End of list."
+	    echo
+	    echo "RUN dnf clean all"
+	} > "$file"
+    done
+}
 
 opensuse_packages_for ()
 {
@@ -83,24 +83,38 @@ opensuse_packages_for ()
     echo $packages
 }
 
-for opensuse_version in $opensuse_versions; do
-    id=$(echo $opensuse_version | sed 's/:/-/g')
-    file=$id-gdb.Containerfile
+opensuse ()
+{
+    opensuse_versions="leap leap:15.1 tumbleweed"
+    opensuse_packages=$(get_packages opensuse.packages)
 
-    {
-	echo "FROM registry.opensuse.org/opensuse/$opensuse_version"
-	echo
-	case " $opensuse_version " in
-	    " leap "|" tumbleweed ")
-		echo "RUN zypper -n dup"
-		echo
-	esac
-	echo "RUN zypper -n install \\"
-	for opensuse_package in $opensuse_packages; do
-	    echo "    $opensuse_package \\"
-	done
-	echo "# End of list."
-	echo
-	echo "RUN zypper clean"
-    } > "$file"
-done
+    for opensuse_version in $opensuse_versions; do
+	id=$(echo $opensuse_version | sed 's/:/-/g')
+	file=$id-gdb.Containerfile
+
+	{
+	    echo "FROM registry.opensuse.org/opensuse/$opensuse_version"
+	    echo
+	    case " $opensuse_version " in
+		" leap "|" tumbleweed ")
+		    echo "RUN zypper -n dup"
+		    echo
+	    esac
+	    echo "RUN zypper -n install \\"
+	    for opensuse_package in $opensuse_packages; do
+		echo "    $opensuse_package \\"
+	    done
+	    echo "# End of list."
+	    echo
+	    echo "RUN zypper clean"
+	} > "$file"
+    done
+}
+
+main ()
+{
+    fedora
+    opensuse
+}
+
+main "$@"
