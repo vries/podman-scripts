@@ -56,10 +56,11 @@ fedora()
 opensuse_packages_for ()
 {
     local version="$1"
+    shift
 
     packages=""
 
-    for package in $opensuse_packages; do
+    for package in "$@"; do
 	case $package in
 	    mold)
 		case $version in
@@ -117,7 +118,7 @@ opensuse ()
 		    echo
 	    esac
 	    echo "RUN zypper -n install \\"
-	    print_packages $packages
+	    print_packages $(opensuse_packages_for $version $packages)
 	    echo
 	    echo "RUN zypper clean"
 	} > "$file"

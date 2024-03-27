@@ -22,10 +22,8 @@ RUN zypper -n install \
     findutils \
     flex \
     gcc \
-    gcc-32bit \
     gcc-ada \
     gcc-c++ \
-    gcc-c++-32bit \
     gcc-fortran \
     fpc \
     rust \
@@ -34,9 +32,7 @@ RUN zypper -n install \
     gettext-devel \
     git \
     glibc-devel \
-    glibc-devel-32bit \
     glibc-devel-static \
-    glibc-devel-static-32bit \
     glibc-locale \
     gmp-devel \
     libboost_regex-devel \
@@ -55,7 +51,6 @@ RUN zypper -n install \
     libsource-highlight-devel \
     libtool \
     make \
-    mold \
     mpfr-devel \
     ncurses-devel \
     patch \
