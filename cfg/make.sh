@@ -20,24 +20,12 @@ print_packages ()
     done
 }
 
-get_packages ()
-{
-    file="$1"
-
-    # shellcheck disable=SC2002
-    cat "$file" \
-	| sed 's/#.*//' \
-	| sed 's/  */\n/g' \
-	| grep -v "^$" \
-	| sort
-}
-
 fedora()
 {
-    mapfile -t packages < <(get_packages fedora.packages)
-
     for version in "$@"; do
 	file=fedora-$version-gdb.Containerfile
+
+	mapfile -t packages < <(./packages.sh fedora "$version")
 
 	{
 	    echo "FROM registry.fedoraproject.org/fedora:$version"
@@ -52,57 +40,14 @@ fedora()
     done
 }
 
-opensuse_packages_for ()
-{
-    version="$1"
-    shift
-
-    for package in "$@"; do
-	case $package in
-	    mold)
-		case $version in
-		    tumbleweed)
-			true
-			;;
-		    *)
-			continue
-			;;
-		esac
-	esac
-
-	case $version in
-	    leap:43*|leap:15.0|leap:15.1|leap:15.2|leap:15.3)
-		case $package in
-		    libdebuginfod-devel|elfutils-debuginfod)
-			continue
-			;;
-		    libboost_regex-devel)
-			continue
-			;;
-		esac
-	esac
-
-	case $version in
-	    *)
-		case $package in
-		    gcc-32bit|gcc-c++-32bit|glibc-devel-32bit|glibc-devel-static-32bit)
-			continue
-			;;
-		esac
-	esac
-
-	echo "$package"
-    done
-}
-
 opensuse ()
 {
-    mapfile -t packages < <(get_packages opensuse.packages)
-
     for version in "$@"; do
 	id=${version//:/-}
 
 	file=$id-gdb.Containerfile
+
+	mapfile -t packages < <(./packages.sh opensuse "$version")
 
 	{
 	    echo "FROM registry.opensuse.org/opensuse/$version"
@@ -113,9 +58,7 @@ opensuse ()
 		    echo
 	    esac
 	    echo "RUN zypper -n install \\"
-	    mapfile -t packages_for_version \
-		    < <(opensuse_packages_for "$version" "${packages[@]}")
-	    print_packages "${packages_for_version[@]}"
+	    print_packages "${packages[@]}"
 	    echo
 	    echo "RUN zypper clean"
 	} > "$file"
@@ -124,10 +67,11 @@ opensuse ()
 
 debian ()
 {
-    mapfile -t packages < <(get_packages debian.packages)
-
     for version in "$@"; do
 	file=debian-$version-gdb.Containerfile
+
+	mapfile -t packages < <(./packages.sh debian "$version")
+
 
 	{
 	    echo "FROM debian:$version"
