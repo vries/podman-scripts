@@ -1,16 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 
 last ()
 {
     last=$#
+    # shellcheck disable=SC3053
     echo ${!last}
 }
 
 print_packages ()
 {
-    last_package=$(last $@)
+    last_package=$(last "$@")
 
-    for package in $@; do
+    for package in "$@"; do
 	if [ "$package" = "$last_package" ]; then
 	    echo "    $package"
 	else
@@ -26,18 +27,16 @@ get_packages ()
     # shellcheck disable=SC2002
     cat "$file" \
 	| sed 's/#.*//' \
-	| sed 's/  */\n/' \
-	| sort \
-	| tr '\n' ' ' \
-	| sed 's/  */ /g;s/^ *//;s/ *$//'
+	| sed 's/  */\n/g' \
+	| grep -v "^$" \
+	| sort
 }
 
 fedora()
 {
-    versions="38 39 40 rawhide"
-    packages=$(get_packages fedora.packages)
+    mapfile -t packages < <(get_packages fedora.packages)
 
-    for version in $versions; do
+    for version in "$@"; do
 	file=fedora-$version-gdb.Containerfile
 
 	{
@@ -46,7 +45,7 @@ fedora()
 	    echo "RUN dnf upgrade -y"
 	    echo
 	    echo "RUN dnf install -y \\"
-	    print_packages $packages
+	    print_packages "${packages[@]}"
 	    echo
 	    echo "RUN dnf clean all"
 	} > "$file"
@@ -55,10 +54,8 @@ fedora()
 
 opensuse_packages_for ()
 {
-    local version="$1"
+    version="$1"
     shift
-
-    packages=""
 
     for package in "$@"; do
 	case $package in
@@ -94,19 +91,17 @@ opensuse_packages_for ()
 		esac
 	esac
 
-	packages="$packages $package"
+	echo "$package"
     done
-
-    echo $packages
 }
 
 opensuse ()
 {
-    versions="leap leap:15.1 tumbleweed"
-    packages=$(get_packages opensuse.packages)
+    mapfile -t packages < <(get_packages opensuse.packages)
 
-    for version in $versions; do
-	id=$(echo $version | sed 's/:/-/g')
+    for version in "$@"; do
+	id=${version//:/-}
+
 	file=$id-gdb.Containerfile
 
 	{
@@ -118,7 +113,9 @@ opensuse ()
 		    echo
 	    esac
 	    echo "RUN zypper -n install \\"
-	    print_packages $(opensuse_packages_for $version $packages)
+	    mapfile -t packages_for_version \
+		    < <(opensuse_packages_for "$version" "${packages[@]}")
+	    print_packages "${packages_for_version[@]}"
 	    echo
 	    echo "RUN zypper clean"
 	} > "$file"
@@ -127,10 +124,9 @@ opensuse ()
 
 debian ()
 {
-    versions="stable"
-    packages=$(get_packages debian.packages)
+    mapfile -t packages < <(get_packages debian.packages)
 
-    for version in $versions; do
+    for version in "$@"; do
 	file=debian-$version-gdb.Containerfile
 
 	{
@@ -141,7 +137,7 @@ debian ()
 	    echo "RUN apt-get upgrade -y"
 	    echo
 	    echo "RUN apt-get install -y \\"
-	    print_packages $packages
+	    print_packages "${packages[@]}"
 	    echo
 	    echo "RUN apt-get clean"
 	} > "$file"
@@ -150,9 +146,19 @@ debian ()
 
 main ()
 {
-    fedora
-    opensuse
-    debian
+    fedora \
+	38 \
+	39 \
+	40 \
+	rawhide
+
+    opensuse \
+	leap \
+	leap:15.1 \
+	tumbleweed
+
+    debian \
+	stable
 }
 
 main "$@"

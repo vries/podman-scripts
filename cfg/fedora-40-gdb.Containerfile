@@ -4,18 +4,18 @@ RUN dnf upgrade -y
 
 RUN dnf install -y \
     autoconf \
-    automake \
     autogen \
+    automake \
     bison \
     black \
     bsdtar \
     bzip2 \
     clang \
     coreutils \
+    cpio \
     curl \
     dejagnu \
     diffutils \
-    cpio \
     dpkg \
     dwz \
     elfutils \
@@ -24,8 +24,8 @@ RUN dnf install -y \
     elfutils-devel \
     emacs \
     expat-devel \
-    findutils \
     file \
+    findutils \
     flex \
     fpc \
     gcc \
@@ -45,7 +45,6 @@ RUN dnf install -y \
     gmp-devel \
     guile30-devel \
     gzip \
-    zstd \
     ldc \
     libasan \
     libtool \
@@ -69,6 +68,7 @@ RUN dnf install -y \
     xxhash-devel \
     xz \
     xz-devel \
-    zlib-devel
+    zlib-devel \
+    zstd
 
 RUN dnf clean all

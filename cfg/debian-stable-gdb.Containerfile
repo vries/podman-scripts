@@ -5,89 +5,89 @@ RUN apt-get update
 RUN apt-get upgrade -y
 
 RUN apt-get install -y \
+    autoconf \
+    autogen \
+    automake \
+    autopoint \
+    autotools-dev \
+    bison \
     build-essential \
     bzip2 \
-    coreutils \
-    dos2unix \
-    python3-dev \
-    python3-mock \
-    doxygen \
-    file \
-    tar \
-    curl \
-    libarchive-tools \
-    libarchive-dev \
-    libcurl4-gnutls-dev \
-    findutils \
-    gawk \
-    g++ \
-    libubsan1 \
-    libasan6 \
-    libtool \
     ccache \
-    valgrind \
-    jq \
-    socat \
-    libbz2-dev \
-    xz-utils \
-    liblzma-dev \
+    coreutils \
+    cpio \
+    curl \
+    dejagnu \
+    diffutils \
+    docbook-xml \
+    docbook-xsl \
+    dos2unix \
+    doxygen \
+    dwz \
+    elfutils \
+    file \
+    findutils \
+    flex \
+    g++ \
+    gawk \
+    gdb \
+    gettext \
+    gettext \
+    git \
     gzip \
-    zlib1g-dev \
-    zstd \
-    libzstd-dev \
+    help2man \
+    iproute2 \
+    jq \
+    lcov \
+    libarchive-dev \
+    libarchive-tools \
+    libarchive-tools \
+    libasan6 \
+    libbz2-dev \
+    libcurl4-gnutls-dev \
     libdebuginfod-dev \
+    libdw-dev \
+    libelf-dev \
     libexpat-dev \
+    libgmp-dev \
+    libgmp-dev \
     libisl-dev \
     libjson-c-dev \
+    liblzma-dev \
     libmicrohttpd-dev \
     libmpc-dev \
-    libgmp-dev \
     libmpfr-dev \
-    libgmp-dev \
     libncurses-dev \
+    libopenmpi-dev \
     libsqlite3-dev \
-    libelf-dev \
-    libdw-dev \
-    elfutils \
-    dwz \
+    libtool \
+    libubsan1 \
     libxml2-dev \
+    libxxhash-dev \
+    libzstd-dev \
     m4 \
-    pkg-config \
-    gettext \
-    autopoint \
-    autogen \
-    lcov \
     mailcap \
     make \
-    git \
-    autotools-dev \
-    autoconf \
-    dejagnu \
-    automake \
-    gettext \
-    bison \
-    flex \
     media-types \
     patch \
+    pkg-config \
+    procps \
+    python3-dev \
+    python3-mock \
     python3-rpm \
     python3-sphinx \
     python3-xdg \
-    libopenmpi-dev \
-    gdb \
-    help2man \
-    wget \
-    libxxhash-dev \
+    rpm2cpio \
+    socat \
+    tar \
     texinfo \
     util-linux \
-    diffutils \
-    iproute2 \
-    libarchive-tools \
-    cpio \
-    rpm2cpio \
-    procps \
+    valgrind \
+    wget \
     xmlto \
     xsltproc \
-    docbook-xsl \
-    docbook-xml
+    xz-utils \
+    zlib1g-dev \
+    zstd
 
 RUN apt-get clean

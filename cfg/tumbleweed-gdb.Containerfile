@@ -21,28 +21,22 @@ RUN zypper -n install \
     file \
     findutils \
     flex \
+    fpc \
     gcc \
     gcc-ada \
     gcc-c++ \
     gcc-fortran \
-    fpc \
-    rust \
-    gcc-objc \
     gcc-go \
+    gcc-objc \
     gettext-devel \
     git \
     glibc-devel \
     glibc-devel-static \
     glibc-locale \
     gmp-devel \
+    gzip \
     libboost_regex-devel \
     libbz2-devel \
-    xz \
-    xz-devel \
-    gzip \
-    zlib-devel \
-    zstd \
-    libzstd-devel \
     libcurl-devel \
     libdebuginfod-devel \
     libdw-devel \
@@ -50,6 +44,7 @@ RUN zypper -n install \
     libexpat-devel \
     libsource-highlight-devel \
     libtool \
+    libzstd-devel \
     make \
     mold \
     mpfr-devel \
@@ -58,6 +53,7 @@ RUN zypper -n install \
     procps \
     python3-devel \
     python3-pygments \
+    rust \
     sharutils \
     systemtap-sdt-devel \
     tar \
@@ -65,6 +61,10 @@ RUN zypper -n install \
     util-linux \
     valgrind \
     xxhash-devel \
+    xz \
+    xz-devel \
+    zlib-devel \
+    zstd \
     zypper
 
 RUN zypper clean
