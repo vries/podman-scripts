@@ -47,6 +47,7 @@ glibc-static
 python3-pygments
 dwz
 clang
+systemtap-sdt-devel
 
 # Other.
 libubsan libasan

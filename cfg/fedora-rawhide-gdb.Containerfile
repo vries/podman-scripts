@@ -60,6 +60,7 @@ RUN dnf install -y \
     python3-pygments \
     readline-devel \
     rustc \
+    systemtap-sdt-devel \
     tar \
     texinfo \
     util-linux \
