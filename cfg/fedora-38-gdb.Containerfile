@@ -47,6 +47,7 @@ RUN dnf install -y \
     gzip \
     ldc \
     libasan \
+    libstdc++-static \
     libtool \
     libubsan \
     libzstd-devel \

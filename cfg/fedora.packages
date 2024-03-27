@@ -48,6 +48,7 @@ python3-pygments
 dwz
 clang
 systemtap-sdt-devel
+libstdc++-static
 
 # Other.
 libubsan libasan
