@@ -45,6 +45,7 @@ RUN zypper -n install \
     ncurses-devel \
     patch \
     procps \
+    python3-curses \
     python3-devel \
     python3-pygments \
     rust \

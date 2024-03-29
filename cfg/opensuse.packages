@@ -36,6 +36,7 @@ gcc-ada gcc-fortran fpc rust gcc-objc gcc-go
 elfutils-debuginfod
 sharutils
 python3-pygments
+python3-curses
 binutils-gold
 
 # Other.
