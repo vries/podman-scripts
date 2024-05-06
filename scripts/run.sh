@@ -28,7 +28,7 @@ if ! podman ps -a | grep -q $id; then
 	   --privileged \
 	   --name $id \
 	   -dt \
-	   -v /data/vries:/data/vries \
+	   -v /data/$USER:/data/$USER \
 	   $id
 fi
 
