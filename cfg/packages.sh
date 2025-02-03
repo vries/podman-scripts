@@ -83,7 +83,7 @@ main ()
     case "$distro" in
 	fedora)
 	    case "$version" in
-		38|39|40|rawhide)
+		38|39|40|41|rawhide)
 		    true
 		    ;;
 		*)

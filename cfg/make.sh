@@ -94,6 +94,7 @@ main ()
 	38 \
 	39 \
 	40 \
+	41 \
 	rawhide
 
     opensuse \
