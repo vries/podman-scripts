@@ -28,8 +28,7 @@ RUN zypper -n install \
     libexpat-devel \
     glibc-devel glibc-locale \
     ncurses-devel \
-    libsource-highlight-devel \
-    libboost_regex-devel
+    libsource-highlight-devel
 
 # Packages to test gdb.
 RUN zypper -n install \
