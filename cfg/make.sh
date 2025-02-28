@@ -32,7 +32,7 @@ fedora()
 	    echo
 	    echo "RUN dnf upgrade -y"
 	    echo
-	    echo "RUN dnf install -y \\"
+	    echo "RUN dnf install --skip-unavailable -y \\"
 	    print_packages "${packages[@]}"
 	    echo
 	    echo "RUN dnf clean all"

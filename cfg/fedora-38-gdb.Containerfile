@@ -2,7 +2,7 @@ FROM registry.fedoraproject.org/fedora:38
 
 RUN dnf upgrade -y
 
-RUN dnf install -y \
+RUN dnf install --skip-unavailable -y \
     autoconf \
     autogen \
     automake \
