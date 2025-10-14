@@ -47,6 +47,7 @@ RUN dnf install -y \
     gzip \
     ldc \
     libasan \
+    libbabeltrace-devel \
     libstdc++-static \
     libtool \
     libubsan \

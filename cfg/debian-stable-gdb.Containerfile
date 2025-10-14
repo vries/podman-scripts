@@ -79,6 +79,7 @@ RUN apt-get install -y \
     python3-xdg \
     rpm2cpio \
     socat \
+    systemtap-sdt-dev \
     tar \
     texinfo \
     util-linux \

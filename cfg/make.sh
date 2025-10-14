@@ -95,10 +95,12 @@ main ()
 	39 \
 	40 \
 	41 \
+	42 \
 	rawhide
 
     opensuse \
-	leap \
+	leap:16.0 \
+	leap:15.6 \
 	leap:15.1 \
 	tumbleweed
 
