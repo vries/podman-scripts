@@ -40,6 +40,23 @@ opensuse_packages_for ()
 			continue
 			;;
 		esac
+		;;
+
+	    leap:16.0)
+		case $package in
+		    binutils-gold)
+			continue
+			;;
+		    gettext-devel)
+			echo "gettext-tools"
+			continue
+			;;
+		    python3-curses|python3-pygments|python3-devel)
+			echo "$package" | sed 's/python3-/python313-/'
+			continue
+			;;
+		esac
+		;;
 	esac
 
 	case $version in
@@ -95,7 +112,7 @@ main ()
 
 	opensuse)
 	    case "$version" in
-		leap|leap:15.1|tumbleweed)
+		leap|leap:15.1|leap:15.6|leap:16.0|tumbleweed)
 		    true
 		    ;;
 		*)

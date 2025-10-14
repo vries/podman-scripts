@@ -1,3 +1,3 @@
 #!/bin/sh
 
-./scripts/run.sh cfg/leap-gdb-16-0.Containerfile
+./scripts/run.sh cfg/leap-16.0-gdb.Containerfile

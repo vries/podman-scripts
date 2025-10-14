@@ -1,6 +1,67 @@
 FROM registry.opensuse.org/opensuse/leap:16.0
 
 RUN zypper -n install \
-    unknown version for opensuse
+    autoconf \
+    automake \
+    bison \
+    bsdtar \
+    bzip2 \
+    coreutils \
+    cpio \
+    dejagnu \
+    diffutils \
+    dos2unix \
+    dpkg \
+    elfutils \
+    elfutils-debuginfod \
+    emacs \
+    file \
+    findutils \
+    flex \
+    fpc \
+    gcc \
+    gcc-ada \
+    gcc-c++ \
+    gcc-fortran \
+    gcc-go \
+    gcc-objc \
+    gettext-tools \
+    git \
+    glibc-devel \
+    glibc-devel-static \
+    glibc-locale \
+    gmp-devel \
+    gzip \
+    libboost_regex-devel \
+    libbz2-devel \
+    libcurl-devel \
+    libdebuginfod-devel \
+    libdw-devel \
+    libelf-devel \
+    libexpat-devel \
+    libsource-highlight-devel \
+    libtool \
+    libzstd-devel \
+    make \
+    mpfr-devel \
+    ncurses-devel \
+    patch \
+    procps \
+    python313-curses \
+    python313-devel \
+    python313-pygments \
+    rust \
+    sharutils \
+    systemtap-sdt-devel \
+    tar \
+    texinfo \
+    util-linux \
+    valgrind \
+    xxhash-devel \
+    xz \
+    xz-devel \
+    zlib-devel \
+    zstd \
+    zypper
 
 RUN zypper clean
